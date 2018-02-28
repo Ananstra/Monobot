@@ -5,6 +5,8 @@ require "twitter"
 class TwitterAlerts
     include Cinch::Plugin
     listen_to :connect, method: :on_connect
+    match "help", method: :help
+    match "help twitter", method: :help_twitter
 
     def on_connect(m)
 
@@ -44,4 +46,13 @@ class TwitterAlerts
             end
         end
     end
+
+    def help(m)
+        m.reply "See !help twitter"
+    end
+
+    def help_twitter(m)
+        m.reply "Twitter has no associated commands. Monobot will automatically report alerts from the PSU and Trimet twitter accounts."
+    end
+
 end
