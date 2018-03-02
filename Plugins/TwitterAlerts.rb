@@ -29,19 +29,20 @@ class TwitterAlerts
             return true
         end
 
-        client.filter(follow: "22589282,4194486134,5652522") do |object|
+        client.filter(follow: "22589282,4194486134,5652522,1965093320") do |object|
             if object.is_a?(Twitter::Tweet)
                 debug "User #{object.user.screen_name} sends #{object.text}. Reply #{object.reply?} Retweet #{object.retweet?} Quote #{object.quote?}"
                 if object.text.start_with?("PSU Alert") and is_originator?(object,"Portland_State")
-                    Channel("#bots").send object.text
                     Channel("#robots").send object.text
                 end
                 if is_originator?(object,"trimet")
-                    Channel("#bots").send "Trimet alert: " + object.text
                     Channel("#robots").send "Trimet alert: " + object.text
                 end
                 if is_originator?(object,"Ananstra22")
                     Channel("#bots").send "Kimani test message: " + object.text
+                end
+                if is_originator?(object,"cat_alerts")
+                    Channel("#robots").send "CAT Alert:" + object.text
                 end
             end
         end
@@ -52,7 +53,7 @@ class TwitterAlerts
     end
 
     def help_twitter(m)
-        m.reply "Twitter has no associated commands. Monobot will automatically report alerts from the PSU and Trimet twitter accounts."
+        m.reply "Twitter has no associated commands. Monobot will automatically report alerts from PSU, CAT, and Trimet."
     end
 
 end
