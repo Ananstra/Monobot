@@ -10,15 +10,18 @@ end
 #Get password (I'm paranoid, okay?)
 pass = File.read("./pass.conf")
 conf = YAML.load_file("./server.conf")
+
+puts conf
+
 bot = Cinch::Bot.new do
     configure do |c|
         c.server = conf['server']
         c.port = conf['port']
         c.channels = conf['channels'] 
         c.ssl.use = true
-        c.nick = conf['nick')
-        c.realname = conf('realname')
-        c.user = conf('user')
+        c.nick = conf['nick']
+        c.realname = conf['realname']
+        c.user = conf['user']
         c.plugins.plugins = plugins
     end
 
