@@ -9,16 +9,16 @@ Dir.glob("./Plugins/*.rb") do |file|
 end
 #Get password (I'm paranoid, okay?)
 pass = File.read("./pass.conf")
-
+conf = YAML.load_file("./server.conf")
 bot = Cinch::Bot.new do
     configure do |c|
-        c.server = "irc.cat.pdx.edu"
-        c.port = "6697"
-        c.channels = ["#robots catsonly", "#bots"]
+        c.server = conf['server']
+        c.port = conf['port']
+        c.channels = conf['channels'] 
         c.ssl.use = true
-        c.nick = "Monobot"
-        c.realname = "kimani's bot"
-        c.user = "Monobot"
+        c.nick = conf['nick')
+        c.realname = conf('realname')
+        c.user = conf('user')
         c.plugins.plugins = plugins
     end
 

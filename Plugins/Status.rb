@@ -5,6 +5,6 @@ class Status
 
     match "status"
     def execute(m)
-        m.reply "^_^" if m.user.nick == "kimani"
+        m.reply Format(:green, "^_^") if m.user.nick == "kimani"
     end
 end
