@@ -3,8 +3,8 @@ require 'cinch'
 class Channel
     include Cinch::Plugin
 
-    match /monojoin (#?\S+)( \S+)?/, method: :join
-    match /monopart (#?\S+)( \S+)?/, method: :part
+    match /mono join (#?\S+)( \S+)?/, method: :join
+    match /mono part (#?\S+)( \S+)?/, method: :part
 
     def join(m,chan,key = nil)
         return if not m.user.nick == "kimani"
