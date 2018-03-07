@@ -7,7 +7,7 @@ class Harbinger
     match /assume direct control (\S+)/, method: :assume
     match /release/, method: :release
     match /(.*)/, method: :proxy
-    set :prefix, ""
+    set :prefix, ":"
     def assume(m, chan)
         return if (not m.user.nick == "kimani") || (not m.channel.nil?)
         @direct_control = true
@@ -23,7 +23,7 @@ class Harbinger
 
     def proxy(m, message)
         puts "Channel: #{m.channel.nil?}"
-        return if (not m.user.nick == "kimani") || (not m.channel.nil?) || (not @direct_control) || m.message.start_with?("assume direct control")
+        return if (not m.user.nick == "kimani") || (not m.channel.nil?) || (not @direct_control) || m.message.start_with?("assume direct control") || m.message.start_with?("release")
         Channel(@chan).send message
     end
 end
