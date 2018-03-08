@@ -27,10 +27,10 @@ bot = Cinch::Bot.new do
 
     #Authenticate
     on :connect do
-        if (bot.nick != "Monobot")
-            User('NickServ').send "regain Monobot #{pass}"
+        if (bot.nick != conf['nick'])
+            User('NickServ').send "regain #{conf['nick']} #{pass}"
         end
-        User('NickServ').send "identify Monobot #{pass}"
+        User('NickServ').send "identify #{conf['nick']} #{pass}"
         pass = ""
     end
 end
