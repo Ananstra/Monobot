@@ -35,7 +35,7 @@ class TwitterAlerts
                     if object.text.start_with?("PSU Alert") && is_originator?(object,"Portland_State")
                         Channel("#robots").send object.text
                     end
-                    if is_originator?(object,"trimet")
+                    if is_originator?(object,"trimetalerts")
                         Channel("#robots").send "Trimet alert: " + object.text
                     end
                     if is_originator?(object,"Ananstra22")
