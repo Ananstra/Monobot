@@ -29,7 +29,7 @@ class TwitterAlerts
             return true
         end
         loop do
-            client.filter(follow: "22589282,4194486134,5652522,1965093320") do |object|
+            client.filter(follow: "22589282,4194486134,216522918,1965093320") do |object|
                 if object.is_a?(Twitter::Tweet)
                     debug "User #{object.user.screen_name} sends #{object.text}. Reply #{object.reply?} Retweet #{object.retweet?} Quote #{object.quote?}"
                     if object.text.start_with?("PSU Alert") && is_originator?(object,"Portland_State")
