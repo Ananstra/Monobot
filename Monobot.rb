@@ -40,5 +40,6 @@ Kernel.trap('INT') do
     quit_thread = Thread.new { bot.quit("Ouch, RIP me") }
 end
 
+bot.loggers << Cinch::Logger::FormattedLogger.new(File.open("./Monobot.log","a"))
 bot.start
 quit_thread.join

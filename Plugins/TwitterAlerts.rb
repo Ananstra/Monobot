@@ -29,6 +29,7 @@ class TwitterAlerts
             return true
         end
         loop do
+            debug "Starting Twitter Filter"
             client.filter(follow: "22589282,4194486134,216522918,1965093320") do |object|
                 if object.is_a?(Twitter::Tweet)
                     debug "User #{object.user.screen_name} sends #{object.text}. Reply #{object.reply?} Retweet #{object.retweet?} Quote #{object.quote?}"
