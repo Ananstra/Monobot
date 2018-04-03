@@ -29,23 +29,27 @@ class TwitterAlerts
             return true
         end
         loop do
-            debug "Starting Twitter Filter"
-            client.filter(follow: "22589282,4194486134,216522918,1965093320") do |object|
-                if object.is_a?(Twitter::Tweet)
-                    debug "User #{object.user.screen_name} sends #{object.text}. Reply #{object.reply?} Retweet #{object.retweet?} Quote #{object.quote?}"
-                    if object.text.start_with?("PSU Alert") && is_originator?(object,"Portland_State")
-                        Channel("#robots").send object.text
-                    end
-                    if is_originator?(object,"trimetalerts")
-                        Channel("#robots").send "Trimet alert: " + object.text
-                    end
-                    if is_originator?(object,"Ananstra22")
-                        Channel("#bots").send "Kimani test message: " + object.text
-                    end
-                    if is_originator?(object,"cat_alerts")
-                        Channel("#robots").send "CAT Alert:" + object.text
+            info "Starting Twitter Filter"
+            begin
+                client.filter(follow: "22589282,4194486134,216522918,1965093320") do |object|
+                    if object.is_a?(Twitter::Tweet)
+                        info "User #{object.user.screen_name} sends #{object.text}. Reply #{object.reply?} Retweet #{object.retweet?} Quote #{object.quote?}"
+                        if object.text.start_with?("PSU Alert") && is_originator?(object,"Portland_State")
+                            Channel("#robots").send object.text
+                        end
+                        if is_originator?(object,"trimetalerts")
+                            Channel("#robots").send "Trimet alert: " + object.text
+                        end
+                        if is_originator?(object,"Ananstra22")
+                            Channel("#bots").send "Kimani test message: " + object.text
+                        end
+                        if is_originator?(object,"cat_alerts")
+                            Channel("#robots").send "CAT Alert:" + object.text
+                        end
                     end
                 end
+            rescue
+                info "In twitter rescue block"
             end
         end
     end

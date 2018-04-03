@@ -41,5 +41,6 @@ Kernel.trap('INT') do
 end
 
 bot.loggers << Cinch::Logger::FormattedLogger.new(File.open("./Monobot.log","a"))
+bot.loggers[1].level = :info
 bot.start
 quit_thread.join
