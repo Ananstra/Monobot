@@ -4,6 +4,8 @@ class Bird
     include Cinch::Plugin
     match /\\o>.*/, strip_colors: true, method: :rightbird
     match /<o\/.*/, strip_colors: true, method: :leftbird
+    match /\/o<.*/, strip_colors: true, method: :rightbird
+    match />o\\.*/, strip_colors: true, method: :leftbird
     set :prefix, /^/
     def rightbird(m)
         m.reply "/)"
