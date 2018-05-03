@@ -38,7 +38,7 @@ class TwitterAlerts
                             Channel("#robots").send object.text
                         end
                         if is_originator?(object,"trimetalerts")
-                            Channel("#robots").send "Trimet alert: " + object.text
+                            Channel("#robots").send "Trimet alert: " + object.text.gsub("&amp;", "&")
                         end
                         if is_originator?(object,"Ananstra22")
                             Channel("#bots").send "Kimani test message: " + object.text
